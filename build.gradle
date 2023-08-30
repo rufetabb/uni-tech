@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'org.springframework.boot' version '3.1.3'
+    id 'io.spring.dependency-management' version '1.1.3'
+}
+
+group = 'az.unitech'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+ext {
+    set('spockVersion', "2.4-M1-groovy-4.0")
+    set('openapiVersion', "2.2.0")
+    set('mapstructVersion', "1.5.5.Final")
+    set('mapstructProcessorVersion', "1.5.5.Final")
+    set('feignVersion', "4.0.4")
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign:${feignVersion}"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-api:${openapiVersion}"
+
+    testImplementation "org.spockframework:spock-core:$spockVersion"
+    testImplementation "org.spockframework:spock-spring:$spockVersion"
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: "${mapstructProcessorVersion}"
+    implementation 'org.liquibase:liquibase-core:4.20.0'
+
+
+    runtimeOnly 'org.postgresql:postgresql:42.5.0'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

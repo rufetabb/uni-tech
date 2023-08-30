@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-details-table
+      author: urfat_abbasov
+      createTable:
+        tableName: user_details
+        columns:
+          - column:
+              name: user_id
+              type: VARCHAR(255)
+              constraints:
+                primaryKey: true
+          - column:
+              name: name
+              type: VARCHAR(255)
+          - column:
+              name: surname
+              type: VARCHAR(255)
+          - column:
+              name: pin
+              type: VARCHAR(255)
+          - column:
+              name: password
+              type: VARCHAR(255)

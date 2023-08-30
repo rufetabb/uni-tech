@@ -1,0 +1,11 @@
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 200000
+        readTimeout: 190000
+        loggerLevel: FULL
+        decode404: false
+      currency-api:
+        url: https://api.fastforex.io
+        apiKey: e6b04d459d-5cd18aab8f-s07ied

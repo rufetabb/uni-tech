@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+    include:
+      - server
+      - common
+      - feign
+      - logging
+      - db
+      - management
+      - feign
+
+
