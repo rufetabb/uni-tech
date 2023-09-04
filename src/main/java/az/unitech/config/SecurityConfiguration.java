@@ -42,18 +42,13 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .requestMatchers("/swagger-ui/**", "/javainuse-openapi/**", "/register/**", "/login/**")
-                .permitAll()
-                .anyRequest().authenticated().and().httpBasic(withDefaults());
-        http.formLogin(withDefaults())
+       http.authorizeRequests()
+                .requestMatchers("/v1/register").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin(withDefaults())
                 .logout(withDefaults());
-
-
-        http.csrf(csrf -> csrf.disable())
-                .sessionManagement(sessionManagement ->
-                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+        http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 
